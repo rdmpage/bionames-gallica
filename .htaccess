@@ -1,0 +1,14 @@
+RewriteEngine on
+#RewriteBase /~rpage/gallica/
+RewriteBase /bionames-gallica
+
+#---------------------------------------------------------------------------------------------------
+# DocumentCloud Gallica
+
+# Next rule uses QSA flag so that JSONP with ?callback= parameter will still work
+# see http://stackoverflow.com/questions/822421/match-question-mark-in-mod-rewrite-rule-regex
+#text
+RewriteRule ^(.*)/start/([0-9]+)/pages/([0-9]+)-([a-z]+)$	dcp.php?id=$1&start=$2&page=$3&size=$4	[NC,L]
+RewriteRule ^(.*)/start/([0-9]+)/pages/([0-9]+)$			dcp.php?id=$1&start=$2&page=$3			[QSA,L]
+RewriteRule ^documentcloud/(.*).json						dc.php?ark=$1							[QSA,L]
+

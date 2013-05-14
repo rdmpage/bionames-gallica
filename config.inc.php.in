@@ -1,0 +1,35 @@
+<?php
+
+$config = array();
+
+// CouchDB -----------------------------------------------------------------------------------------
+$config['couchdb']			= 'gallica';
+
+// Archive locations -------------------------------------------------------------------------------
+$config['web_root']			= 'http://bionames.org/bionames-gallica';
+
+$config['cache']			= dirname(__FILE__) . '/gallica';
+$config['web_cache']		= $config['web_root'] . '/gallica';
+
+// HTTP proxy --------------------------------------------------------------------------------------
+$config['proxy_name']		= '';
+$config['proxy_port']		= '';
+
+//$config['proxy_name']		= 'wwwcache.gla.ac.uk';
+//$config['proxy_port']		= '8080';
+
+// local CouchDB
+$config['couchdb_options'] = array(
+		'database' => '',
+		'host' => 'localhost',
+		'port' => 5984
+		);
+
+// HTTP proxy
+if ($config['proxy_name'] != '')
+{
+	$config['couchdb_options']['proxy'] = $config['proxy_name'] . ':' . $config['proxy_port'];
+}
+
+
+?>
