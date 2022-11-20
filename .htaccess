@@ -1,6 +1,6 @@
 RewriteEngine on
 #RewriteBase /~rpage/gallica/
-RewriteBase /bionames-gallica
+RewriteBase /bionames-gallica/
 
 RedirectMatch 404 /\.git
 

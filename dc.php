@@ -43,8 +43,8 @@ else
 	$obj->resources = new stdclass;
 	
 	$obj->resources->page = new stdclass;
-	$obj->resources->page->text 	= $config['web_root'] . '/' . $id . '/start/' . $start  . '/pages/{page}';
-	$obj->resources->page->image 	= $config['web_root'] . '/' . $id . '/start/' . $start  . '/pages/{page}-{size}';
+	$obj->resources->page->text 	= $config['web_root'] . '/documentcloud/' . $id . '/start/' . $start  . '/pages/{page}';
+	$obj->resources->page->image 	= $config['web_root'] . '/documentcloud/' . $id . '/start/' . $start  . '/pages/{page}-{size}';
 	
 	$obj->sections = array();	
 	$obj->annotations = array();

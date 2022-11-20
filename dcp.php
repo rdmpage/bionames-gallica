@@ -148,9 +148,11 @@ function get_page($id, $start, $page = 0)
 	
 	if (!$image_exists)
 	{
-		//$img = get($image_url, 'Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405');
+		// echo $image_url; exit();
+	
+		$img = get($image_url, 'Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405');
 		
-		$img = get('https://ozymandias-demo.herokuapp.com/image_proxy.php?url=' . urlencode($image_url));
+		//$img = get('https://ozymandias-demo.herokuapp.com/image_proxy.php?url=' . urlencode($image_url));
 		
 		/*
 		echo $image_url . "\n";
@@ -164,9 +166,9 @@ function get_page($id, $start, $page = 0)
 		$image_url = $base_url . '.thumbnail';
 		$image_file = $cache_namespace . '/thumbnails/f' . $page_to_fetch . '.png';
 		
-		//$img = get($image_url, 'Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405');
+		$img = get($image_url, 'Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405');
 
-		$img = get('https://ozymandias-demo.herokuapp.com/image_proxy.php?url=' . urlencode($image_url));
+		//$img = get('https://ozymandias-demo.herokuapp.com/image_proxy.php?url=' . urlencode($image_url));
 
 		file_put_contents($image_file, $img);
 
