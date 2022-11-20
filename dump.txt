@@ -101,4 +101,8 @@
 #http://gallica.bnf.fr/ark:/12148/bpt6k54945272/f43	187	198
 #http://gallica.bnf.fr/ark:/12148/bpt6k54945272/f55	199	256
 #http://gallica.bnf.fr/ark:/12148/bpt6k54945272/f5	149	158
-http://gallica.bnf.fr/ark:/12148/bpt6k54945272/f31	175	185
+#http://gallica.bnf.fr/ark:/12148/bpt6k54945272/f31	175	185
+#http://gallica.bnf.fr/ark:/12148/bpt6k5768569j/f1162	3264	3269
+#http://gallica.bnf.fr/ark:/12148/bpt6k5809530k/f661	1643	1650
+#http://gallica.bnf.fr/ark:/12148/bpt6k6152597g/f25	259	284
+https://gallica.bnf.fr/ark:/12148/bpt6k6543820z/f161	137	139

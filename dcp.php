@@ -49,7 +49,6 @@ function get($url, $userAgent = '')
 	curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1); 
 	curl_setopt ($ch, CURLOPT_FOLLOWLOCATION,	1); 
 	//curl_setopt ($ch, CURLOPT_HEADER,		  1);  
-
 	curl_setopt ($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
 	
 	if ($userAgent != '')
@@ -76,6 +75,8 @@ function get($url, $userAgent = '')
 		
 		 //$header = substr($curl_result, 0, $info['header_size']);
 		//echo $header;
+		
+		//print_r($info);
 		
 		
 		$http_code = $info['http_code'];
@@ -126,12 +127,16 @@ function get_page($id, $start, $page = 0)
 	// Grab image and cache
 	$page_to_fetch = $page_object->start_page + $page;
 	
-	$base_url = 'http://gallica.bnf.fr/ark:/' . $page_object->namespace . '/' . $page_object->id . '/f' . $page_to_fetch;
+	$base_url = 'https://gallica.bnf.fr/ark:/' . $page_object->namespace . '/' . $page_object->id . '/f' . $page_to_fetch;
 	
 	$image_url = $base_url . '.highres';
 	$image_file = $cache_namespace . '/f' . $page_to_fetch . '.png';
 	
 	$image_exists = file_exists($image_file);
+	
+	// Force regenerating image
+	$image_exists = false;
+	
 	if ($image_exists)
 	{
 		// check not zero size from past fail
@@ -143,14 +148,26 @@ function get_page($id, $start, $page = 0)
 	
 	if (!$image_exists)
 	{
-		$img = get($image_url);
+		//$img = get($image_url, 'Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405');
+		
+		$img = get('https://ozymandias-demo.herokuapp.com/image_proxy.php?url=' . urlencode($image_url));
+		
+		/*
+		echo $image_url . "\n";
+		echo $image_file . "\n";
+		echo "img=" . $img . "\n";
+		*/		
+		
 		file_put_contents($image_file, $img);
 		
 		// thumbnail
 		$image_url = $base_url . '.thumbnail';
 		$image_file = $cache_namespace . '/thumbnails/f' . $page_to_fetch . '.png';
 		
-		$img = get($image_url);
+		//$img = get($image_url, 'Mozilla/5.0 (iPad; U; CPU OS 3_2_1 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Mobile/7B405');
+
+		$img = get('https://ozymandias-demo.herokuapp.com/image_proxy.php?url=' . urlencode($image_url));
+
 		file_put_contents($image_file, $img);
 
 		
@@ -159,6 +176,8 @@ function get_page($id, $start, $page = 0)
 		$text_file = $cache_namespace . '/text/f' . $page_to_fetch . '.txt';
 		
 		$html = get($text_url);
+		$html = get('https://ozymandias-demo.herokuapp.com/image_proxy.php?url=' . urlencode($text_url));
+		
 		
 		$html = str_replace("\n", " ", $html);
 		$html = str_replace("\r", " ", $html);
@@ -202,9 +221,12 @@ $image = false;
 $size = 'normal';
 
 // test
-//$id = 'bpt6k31239';
-//$start = '1614';
-//$page = 1;
+if (0)
+{
+	$id = 'bpt6k54425183';
+	$start = '245';
+	$page = 1;
+}
 
 $callback = '';
 
@@ -238,6 +260,8 @@ if (isset($_GET['callback']))
 $page = get_page($id, $start, $page);
 
 //print_r($page);
+
+//exit();
 
 if ($image)
 {	
